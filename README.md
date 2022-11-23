@@ -1,2 +1,2 @@
 # ft_printf
-Recoding the printf function from Libc
+Recoding the printf function in Libc
