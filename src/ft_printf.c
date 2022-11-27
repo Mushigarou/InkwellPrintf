@@ -1,48 +1,44 @@
+// if format specifier is > nbr of arguments, behaviour is undefined
+// 
+
 #include "../include/ft_printf.h"
 
 int ft_printf(const char *p, ...)
 {
-    va_list my_lst;
-    va_start(my_lst, p);
+    va_list     args;
+    va_start(args, p);
 
-    char    *s;
-    char    **print_type;
-    size_t  i;
-    size_t  j;
-     
-    i = 0;
-    print_type = ft_split(p, '%');
-    if (print_type == NULL)
+    if (p == NULL)
         return (0);
-    while (print_type[i])
+    unsigned int i = 0;
+    while (p[i] != '\0')
     {
-        j = 0;
-        while (print_type[i][j])
+       while(p[i] && p[i] != '%')
+       {
+            ft_putchar_fd(p[i], 1);
+            i++;       
+       }
+       if(p[i] == '%' && p[i + 1] != '\0')
         {
-            if (print_type[i][j + 1] == (char)'s')
-            {
-                s = va_arg (my_lst, char *);
-                ft_putstr_fd(s, 1);
-            }
-            j++;
+            i++;
+            if(p[i] == 's')
+                ft_putstr_fd(va_arg(args, char *), 1);
+            else if(p[i] == 'c')
+                ft_putchar_fd(va_arg(args, int), 1);
+            else
+                ft_putchar_fd(p[i], 1);
         }
         i++;
     }
-    // while (*p)
-    // {
-    //     if (*p == '%' && *(p + 1) == 's')
-    //     {
-    //         s = va_arg (my_lst, char *);
-    //         ft_putstr_fd(s, 1);
-    //     }
-    //     p++;
-    // }
-    // printf("%zu", i = ft_strlen(s));
-    return ((int)ft_strlen(p));    
+    va_end(args);
+    return (ft_strlen(p));
 }
 
 int main()
 {
-   char *p = "testing";
-   ft_printf(p, "Blabla");
+    // char    *pt = "%s";
+
+    ft_printf("%c", 'c',"gdilvv");
+    // printf("%d\n", !(ft_strncmp(pt, "he%pllo", 3)));
 }
+

@@ -13,7 +13,7 @@ SRC_PATH = $(addprefix $(SRC_D), /)
 #----------------------------------------------------------------------------------------------
 NAME = libftprintf.a
 
-LIBFT_ARCHIVE = ../libft/libft.a
+LIBFT_ARCHIVE = libft/libft.a
 
 #----------------------------------------------------------------------------------------------
 # Variables
@@ -58,12 +58,12 @@ $(TITLE) :
 		@ printf "❚ 	    ✍❡ FT_PRINTF ❡✍ 		❚\n"$
 		@ printf "□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□\n\n"$(NC)
 
-$(NAME) : $(TITLE) $(OBJ_D) $(OBJ) $(LIBFT_ARCHIVE)
+$(NAME) : $(TITLE) $(OBJ_D) $(OBJ) $(LIBFT_ARCHIVE) 
 	$(AR) $(NAME) $(OBJ)
 	$(CC) $(NAME) $(LIBFT_ARCHIVE)
 	@ printf ${HYEL}"\nft_Printf: Compilation steps finished 👻 "$(HRED)"Run ./a.out\n\n"${NC} 
 
-$(OBJ_D)/%.o : $(SRC_PATH)/%.c $(HEADER)
+$(OBJ_D)/%.o : $(SRC_PATH)%.c $(HEADER)
 	@ $(CC) $(CFLAGS) -c $< -o $@
 	@ printf $(HWHT)"🧐 Compiling ▻ "${HRED}"$(notdir $@)\n"${NC}
 
@@ -87,7 +87,7 @@ re : fclean all
 # Libft rules
 #----------------------------------------------------------------------------------------------
 $(LIBFT_ARCHIVE) :
-	cd ../libft ; make ; make bonus
+	cd ./libft ; make ; make bonus
 
 re_all :
 	cd libft ; make re ; make bonus ; cd .. ; make re
@@ -95,5 +95,5 @@ re_all :
 #----------------------------------------------------------------------------------------------
 # Built-in Targets
 #----------------------------------------------------------------------------------------------
-.SILENT : fclean clean clean_libft re_all $(OBJ_D) $(NAME)
+.SILENT : fclean clean clean_libft re_all $(OBJ_D) $(NAME) $(LIBFT_ARCHIVE)
 .DEFAULT_GOAL := all
