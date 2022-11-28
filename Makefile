@@ -20,7 +20,7 @@ LIBFT_ARCHIVE = libft/libft.a
 #----------------------------------------------------------------------------------------------
 CFLAGS = -Wall -Werror -Wextra
 
-HEADER = ./include/ft_printf.h
+HEADER = include/ft_printf.h
 
 OBJ_D = obj
 
