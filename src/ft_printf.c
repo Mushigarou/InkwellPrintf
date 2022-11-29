@@ -1,40 +1,52 @@
 #include "../include/ft_printf.h"
 
-int ft_printf(const char *p, ...)
+int ft_printf(const char *fmt, ...)
 {
-    va_list     args;
-    va_start(args, p);
+    va_list         args;
+    unsigned int    i;
+    int             len;
+    va_start(args, fmt);
 
-    if (p == NULL)
-        return (0);
-    unsigned int i = 0;
-    while (p[i] != '\0')
+    len = 0;
+    i = 0;
+    while (fmt[i] != '\0')
     {
-       while(p[i] && p[i] != '%')
+       while(fmt[i] && fmt[i] != '%')
        {
-            ft_putchar_fd(p[i], 1);
-            i++;       
+            len += ft_putchar_fd(fmt[i], 1);
+            i++;
        }
-       if(p[i] == '%')
+       if(fmt[i] == '%')
         {
             i++;
-            if(p[i] == 's')
-                ft_putstr_fd(va_arg(args, char *), 1);
-            else if(p[i] == 'c')
-                ft_putchar_fd(va_arg(args, int), 1);
+            if (fmt[i] == 's')
+                len += ft_putstr_fd(va_arg(args, char *), STDOUT);
+            else if (fmt[i] == 'c')
+                len += ft_putchar_fd(va_arg(args, int), STDOUT);
+            else if (fmt[i] == 'd' || fmt[i] == 'i')
+                len += ft_putnbr_fd(va_arg(args, int), STDOUT);
+            else if (fmt[i] == 'x' || fmt[i] == 'X' || fmt[i] == 'p')
+               len += convert_to_hex(va_arg(args, unsigned long), fmt[i]);
+            else if (fmt[i] == 'u')
+               len += ft_putunbr_fd(va_arg(args, unsigned int), STDOUT);
             else
-                ft_putchar_fd(p[i], 1);
+                len += ft_putchar_fd(fmt[i], STDOUT);
             i++;
         }
     }
     va_end(args);
-    return (ft_strlen(p));
+    printf("\nlen = %d\n", len);
+    return (len);
 }
 
 int main()
 {
-    // char    *pt = "%s";
-
-    ft_printf("%c%s s%%%%s%%", 'c',"gdilvv");
-    // printf("%d\n", !(ft_strncmp(pt, "he%pllo", 3)));
+    // char    *pt = "Hey, below is an i.e of int";
+    // void    *ptr;
+    // unsigned int g = 4147483648;
+    // int          x = 2147483647;
+    // ft_printf(  "mine |\nchar        %%c: %c\nstr         %%s: %s\n\nunsigned    %%u: %u\ninteger     %%d: %d\n\naddress of  %%X: %X\naddress of  %%x: %x\nAdress void %%p: %p",'A', pt, g, x, &x, &x, &ptr);
+    ft_printf("%s", NULL);
+    // char    p[] = "hel545lo";
+    // printf("%s", address_toupper(p));
 }
