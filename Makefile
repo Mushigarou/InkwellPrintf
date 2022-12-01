@@ -1,13 +1,16 @@
 #----------------------------------------------------------------------------------------------
 # Source Files
 #----------------------------------------------------------------------------------------------
-SRC = ft_printf.c convert_to_hex.c ft_putunbr_fd.c
+SRC = wr_address.c conv_hex.c ft_putunbr_fd.c ft_printf.c
 
 #----------------------------------------------------------------------------------------------
 # Object Files
 #----------------------------------------------------------------------------------------------
 OBJ = $(addprefix $(OBJ_D)/, $(SRC:.c=.o))
 SRC_PATH = $(addprefix $(SRC_D), /)
+LIBFT_OBJ_M = libft/obj/*.o
+LIBFT_OBJ_B = libft/obj_B/*.o
+
 #----------------------------------------------------------------------------------------------
 # Archives
 #----------------------------------------------------------------------------------------------
@@ -18,7 +21,7 @@ LIBFT_ARCHIVE = libft/libft.a
 #----------------------------------------------------------------------------------------------
 # Variables
 #----------------------------------------------------------------------------------------------
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -c
 
 HEADER = include/ft_printf.h
 
@@ -59,12 +62,12 @@ $(TITLE) :
 		@ printf "□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□\n\n"$(NC)
 
 $(NAME) : $(TITLE) $(OBJ_D) $(OBJ) $(LIBFT_ARCHIVE) 
-	$(AR) $(NAME) $(OBJ)
-	$(CC) $(NAME) $(LIBFT_ARCHIVE)
+	$(AR) $(NAME) $(OBJ) $(LIBFT_OBJ_M) $(LIBFT_OBJ_B)
+#	$(CC) $(NAME) $(LIBFT_ARCHIVE)
 	@ printf ${HYEL}"\nft_Printf: Compilation steps finished 👻 "$(HRED)"Run ./a.out\n\n"${NC} 
 
 $(OBJ_D)/%.o : $(SRC_PATH)%.c $(HEADER)
-	@ $(CC) $(CFLAGS) -c $< -o $@
+	 $(CC) $(CFLAGS) $< -o $@
 	@ printf $(HWHT)"🧐 Compiling ▻ "${HRED}"$(notdir $@)\n"${NC}
 
 $(OBJ_D) :

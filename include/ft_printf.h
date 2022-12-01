@@ -11,7 +11,8 @@
 # include <unistd.h>
 
 int ft_printf(const char *, ...);
-unsigned	long convert_to_hex(unsigned long x, int sp);
+long	long wr_address(unsigned long x);
 int	ft_putunbr_fd(unsigned int n, int fd);
+void conv_hex(unsigned int x, int *len, int sp);
 
 #endif // FT_PRINTF_H
