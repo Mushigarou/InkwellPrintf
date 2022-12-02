@@ -67,7 +67,7 @@ $(NAME) : $(TITLE) $(OBJ_D) $(OBJ) $(LIBFT_ARCHIVE)
 	@ printf ${HYEL}"\nft_Printf: Compilation steps finished 👻 "$(HRED)"Run ./a.out\n\n"${NC} 
 
 $(OBJ_D)/%.o : $(SRC_PATH)%.c $(HEADER)
-	 $(CC) $(CFLAGS) $< -o $@
+	@ $(CC) $(CFLAGS) $< -o $@
 	@ printf $(HWHT)"🧐 Compiling ▻ "${HRED}"$(notdir $@)\n"${NC}
 
 $(OBJ_D) :
