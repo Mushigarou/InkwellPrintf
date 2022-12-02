@@ -5,7 +5,7 @@
 #  define STDOUT 1
 # endif // STDOUT
 
-# include "../libft/libft.h"
+# include "../libft_printf/libft.h"
 # include <stdio.h>
 # include <stdarg.h>
 # include <unistd.h>
