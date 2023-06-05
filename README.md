@@ -1,7 +1,9 @@
 # ft_printf
+
 Wrote a library that contains ft_printf(), a function that mimic the original printf()
 
 ## Handles :
+
 - %c Prints a single character.
 - %s Prints a string (as defined by the common C convention).
 - %p The void * pointer argument has to be printed in hexadecimal format.
@@ -14,3 +16,8 @@ Wrote a library that contains ft_printf(), a function that mimic the original pr
 
 ## Exception : 
 - Doesn't have the same buffer management as the original printf()
+
+### Contributions to this project are welcome! If you find any issues or have improvements to suggest, please feel free to submit a pull request.
+## License
+
+This project is licensed under the MIT license
